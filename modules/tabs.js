@@ -53,9 +53,6 @@ directive('bootstrapTabs', function() {
         $scope.itemTitle = function(item) {
             return item[opts.itemTitleAttr];
         };
-        
-        //We set this the tab-item can access the main Ctrl through parent.Fn()
-        $scope.parent = $scope.$parent;
     }
 
     return {
