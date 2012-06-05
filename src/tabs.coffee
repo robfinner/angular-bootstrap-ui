@@ -26,8 +26,8 @@ angular.module('angularBootstrap.tabs', [])
 					$scope.selectTab $scope.tabs[Math.max $scope.selectedIdx-1,0]
 
 		$scope.selectTab = (tab) ->
-			_tab.selected false for _tab in $scope.tabs 
-			tab.selected true
+			_tab.selected = false for _tab in $scope.tabs 
+			tab.selected = true
 			$scope.selectedTab = tab
 			$scope.selectedIdx = $scope.tabs.indexOf tab
 
