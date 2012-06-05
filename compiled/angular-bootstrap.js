@@ -57,12 +57,12 @@
           });
           $(elm).bind('shown', function() {
             return $timeout(function() {
-              return scope.$parent.modalShown = true;
+              return scope.ngModel(true);
             });
           });
           return $(elm).bind('hidden', function() {
             return $timeout(function() {
-              return scope.$parent.modalShown = false;
+              return scope.ngModel(false);
             });
           });
         }

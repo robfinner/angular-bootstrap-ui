@@ -44,8 +44,8 @@ angular.module('angularBootstrap.modal', [])
 					$(elm).modal 'hide'
 
 			$(elm).bind 'shown', ->
-				$timeout -> scope.$parent.modalShown = true
+				$timeout -> scope.ngModel true
 			$(elm).bind 'hidden', ->
-				$timeout -> scope.$parent.modalShown = false
+				$timeout -> scope.ngModel false
 	}
 ])
