@@ -5,21 +5,21 @@
 
   /*
   modal. Restrict class. Options:
-  	ng-model (scope-variable, optional, default=none)
-  	  If ng-model is NOT set, this will behave like a normal
-  	  bootstrap modal, except backdrop/keyboard options will be used
-  	  If ng-model IS set, the value will be set to true whenever the
-  	  modal is open, and false when it is closed.
-  	  Additionally, you may set it to true to open the
-  	  modal and set it to false to close it.
-  	backdrop: (boolean, optional, default=true)
-  	  Decides whether the modal has a backdrop when opening
-  	keyboard: (boolean, optional, default=true)
-  	  Decides whether the modal can be closed with escape key	
+    ng-model (scope-variable, optional, default=none)
+      If ng-model is NOT set, this will behave like a normal
+      bootstrap modal, except backdrop/keyboard options will be used
+      If ng-model IS set, the value will be set to true whenever the
+      modal is open, and false when it is closed.
+      Additionally, you may set it to true to open the
+      modal and set it to false to close it.
+    backdrop: (boolean, optional, default=true)
+      Decides whether the modal has a backdrop when opening
+    keyboard: (boolean, optional, default=true)
+      Decides whether the modal can be closed with escape key 
   
   Example usage, showing both ways of opening/closing the modal:
   <div id="myModal" class="modal hide" ng-model="modalVariable">
-  	<button ng-click="modalVariable = false">Close Modal</button>
+    <button ng-click="modalVariable = false">Close Modal</button>
   </div>
   <a href="#myModal" data-toggle="modal">Open Modal</a>
   */
@@ -57,12 +57,12 @@
           });
           $(elm).bind('shown', function() {
             return $timeout(function() {
-              return scope.$parent.modalShown = true;
+              return scope.ngModel(true);
             });
           });
           return $(elm).bind('hidden', function() {
             return $timeout(function() {
-              return scope.$parent.modalShown = false;
+              return scope.ngModel(false);
             });
           });
         }
@@ -74,11 +74,11 @@
   strap-tabs
   Example usage:
   <strap-tabs>
-  	<strap-tab title="Hello">Content</strap-tab>
-  	<strap-tab title="getTitle()"><h1>I love things!</h1></strap-tab>
-  	<div ng-repeat="stuff in things">
-  		<strap-tab title="{{stuff}}">{{stuff.things}}</strap-tab>
-  	</div>
+    <strap-tab title="Hello">Content</strap-tab>
+    <strap-tab title="getTitle()"><h1>I love things!</h1></strap-tab>
+    <div ng-repeat="stuff in things">
+      <strap-tab title="{{stuff}}">{{stuff.things}}</strap-tab>
+    </div>
   </strap-tabs>
   */
 
@@ -122,7 +122,7 @@
         restrict: 'E',
         transclude: true,
         controller: controllerFn,
-        template: "<div class=\"tabbable\">\n	<ul class=\"nav nav-tabs\">\n		<li ng-repeat=\"tab in tabs\" ng-class=\"{active: tab.selected}\">\n			<a href=\"\" ng-click=\"selectTab(tab)\">{{tab.title()}}</a>\n		</li>\n	</ul>\n	<div class=\"tab-content\" ng-transclude>\n	</div>\n</div>"
+        template: "<div class=\"tabbable\">\n <ul class=\"nav nav-tabs\">\n   <li ng-repeat=\"tab in tabs\" ng-class=\"{active: tab.selected}\">\n      <a href=\"\" ng-click=\"selectTab(tab)\">{{tab.title()}}</a>\n    </li>\n </ul>\n <div class=\"tab-content\" ng-transclude>\n </div>\n</div>"
       };
     }
   ]).directive('strapTab', [
