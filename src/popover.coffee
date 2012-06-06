@@ -115,6 +115,7 @@ angular.module('angularBootstrap.popover', [])
 					onMouseover = -> mouseInCount++
 					onMouseout = -> 
 						mouseInCount--
+						# set a timeout because the mosue may take a sec to move between the elements
 						setTimeout ->
 							# If mouse isn't in source or popover, hide popover
 							if mouseInCount is 0
