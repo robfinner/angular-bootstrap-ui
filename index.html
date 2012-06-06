@@ -5,7 +5,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 	<script src="http://code.angularjs.org/1.0.0rc10/angular-1.0.0rc10.js"></script>
-	<script src="angular-bootstrap-with-scripts.js"></script>
+	<script src="https://raw.github.com/ajoslin/angular-bootstrap-ui/master/compiled/angular-bootstrap-with-scripts.js"></script>
 	<script src="demo.js"></script>
 </head>
 <body ng-controller="MainCtrl" ng-init="modalShown = false">
@@ -47,7 +47,7 @@
 						<p>One fine body!</p>
 					</div>
 					<div class="modal-footer">
-						<a class="btn btn-primary" data-dismiss="modal" href="#myModal">Close with data-dismiss</button>
+						<a class="btn btn-primary" data-dismiss="modal" href="#myModal">Close with data-dismiss</a>
 						<a class="btn btn-primary" ng-click="$parent.modalShown = false">Close with Scope Variable</a>
 					</div>
 				</div>
@@ -87,6 +87,32 @@
 				</div>
 			</div><!--/span6-->
 		</div><!--/row-->
+		<hr />
+		<h1>Popover</h1>
+		<div class="row">
+			<div class="span6">
+				<br />
+				This is a bit different from bootstrap's normal popover.
+				<br /><br />
+				Instead of a simple title and content, you can have anything you want inside the popover.
+				<br /><br />
+				The popover is fully controlled by attributes from the popup invoker element: the placement, the event, even the spacing.
+				<br />
+			</div>
+			<div class="span6">
+				<strap-popover id="poppy" title="'hello!'">
+					<b>You can do anything you want inside the popover? Cool!</b>
+					<input ng-model="poppyValue" ng-init="poppyValue = 'splendid!'">
+					<br />=> {{poppyValue}}
+				</strap-popover>
+				<a class="btn" pop-target="#poppy" pop-event="hover" pop-placement="top">event='hover', placement='top'</a>
+				<br /><br />
+				<input style="width: 300px;"pop-target="#poppy" pop-event="focus" pop-placement="left" pop-margin="50" value="event='focus', placement='left', margin='50'">
+				<br /><br />
+				<a class="btn" pop-target="#poppy" pop-event="click" pop-placement="right">event='click', placement='right'</a>
+			</div>
+		</div>
+		<hr />
 	</div><!--/container-->
 </body>
 </html>
