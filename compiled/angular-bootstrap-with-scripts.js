@@ -88,7 +88,7 @@
         var $this, currentSource, directiveOptions, hidePopover, showPopover, togglePopover;
         $this = $(elm).hide().addClass('popover');
         directiveOptions = {
-          placement: scope.placement
+          placement: attrs.placement
         };
         currentSource = null;
         showPopover = function(options) {
@@ -153,8 +153,7 @@
       return {
         restrict: 'E',
         scope: {
-          title: 'evaluate',
-          placement: 'evaluate'
+          title: 'bind'
         },
         link: linkFn,
         transclude: true,
