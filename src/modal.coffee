@@ -1,4 +1,3 @@
-
 ###
 modal. Restrict class. Options:
 	ng-model (scope-variable, optional, default=none)
@@ -43,6 +42,8 @@ angular.module('angularBootstrap.modal', [])
 				else
 					$(elm).modal 'hide'
 
+			# These events could be fired in or out of a $digest - so we use a $timeout
+			# to fix "$digest already happening" errors by making a future $digest be generated
 			$(elm).bind 'shown', ->
 				$timeout -> scope.ngModel true
 			$(elm).bind 'hidden', ->
