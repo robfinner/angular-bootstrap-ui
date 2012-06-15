@@ -32,11 +32,7 @@
       return {
         restrict: 'C',
         require: '?ngModel',
-        scope: {
-          backdrop: 'evaluate',
-          keyboard: 'evaluate',
-          ngModel: 'accessor'
-        },
+        scope: true,
         link: function(scope, elm, attrs, model) {
           $(elm).modal({
             backdrop: scope.backdrop,
@@ -46,9 +42,7 @@
           if (model == null) {
             return;
           }
-          scope.$watch((function() {
-            return scope.ngModel();
-          }), function(value) {
+          scope.$watch(attrs.ngModel, function(value) {
             if (value === true) {
               return $(elm).modal('show');
             } else {
@@ -153,7 +147,7 @@
       return {
         restrict: 'E',
         scope: {
-          title: 'bind'
+          title: '='
         },
         link: linkFn,
         transclude: true,
@@ -254,9 +248,9 @@
           _ref = $scope.tabs;
           for (_i = 0, _len = _ref.length; _i < _len; _i++) {
             _tab = _ref[_i];
-            _tab.selected = false;
+            _tab.selected(false);
           }
-          tab.selected = true;
+          tab.selected(true);
           $scope.selectedTab = tab;
           return $scope.selectedIdx = $scope.tabs.indexOf(tab);
         };
@@ -276,16 +270,27 @@
         restrict: 'E',
         transclude: true,
         controller: controllerFn,
-        template: "<div class=\"tabbable\">\n	<ul class=\"nav nav-tabs\">\n		<li ng-repeat=\"tab in tabs\" ng-class=\"{active: tab.selected}\">\n			<a href=\"\" ng-click=\"selectTab(tab)\">{{tab.title()}}</a>\n		</li>\n	</ul>\n	<div class=\"tab-content\" ng-transclude>\n	</div>\n</div>"
+        template: "<div class=\"tabbable\">\n	<ul class=\"nav nav-tabs\">\n		<li ng-repeat=\"tab in tabs\" ng-class=\"{active: tab.selected()}\">\n			<a href=\"\" ng-click=\"selectTab(tab)\">{{tab.title}}</a>\n		</li>\n	</ul>\n	<div class=\"tab-content\" ng-transclude>\n	</div>\n</div>"
       };
     }
   ]).directive('strapTab', [
     function() {
-      var linkFn;
+      var linkFn, nextTab;
+      nextTab = 0;
       linkFn = function(scope, elm, attrs, container) {
-        container.addTab(scope);
+        var tab;
+        tab = {
+          title: scope.title,
+          selected: function(newVal) {
+            if (newVal == null) {
+              return scope.selected;
+            }
+            return scope.selected = newVal;
+          }
+        };
+        container.addTab(tab);
         return scope.$on('$destroy', function() {
-          return container.removeTab(scope);
+          return container.removeTab(tab);
         });
       };
       return {
@@ -294,7 +299,7 @@
         require: '^strapTabs',
         link: linkFn,
         scope: {
-          title: 'accessor'
+          title: '='
         },
         template: "<div class=\"tab-pane\" ng-class=\"{active:selected}\" ng-show=\"selected\" ng-transclude></div>"
       };

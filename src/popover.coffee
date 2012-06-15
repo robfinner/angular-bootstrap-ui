@@ -75,7 +75,7 @@ angular.module('angularBootstrap.popover', [])
 	return {
 		restrict: 'E'
 		scope:
-			title: 'bind'
+			title: '='
 		link: linkFn
 		transclude: true
 		template: """

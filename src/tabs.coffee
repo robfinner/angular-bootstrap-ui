@@ -26,18 +26,18 @@ angular.module('angularBootstrap.tabs', [])
 					$scope.selectTab $scope.tabs[Math.max $scope.selectedIdx-1,0]
 
 		$scope.selectTab = (tab) ->
-			_tab.selected = false for _tab in $scope.tabs 
-			tab.selected = true
+			_tab.selected false for _tab in $scope.tabs 
+			tab.selected true
 			$scope.selectedTab = tab
 			$scope.selectedIdx = $scope.tabs.indexOf tab
 
 		# Uses `this` to be exposed for angularBootstrap-tab directive
-		@addTab = (tab, index) ->
+		this.addTab = (tab, index) ->
 			$scope.tabs.push tab
 			# Select the tab if it's the only one in the array
 			$scope.selectTab tab if $scope.tabs.length is 1
 
-		@removeTab = (tab) ->
+		this.removeTab = (tab) ->
 			# Without the timeout, angular doesn't always catch this
 			$timeout ->
 				$scope.tabs.splice $scope.tabs.indexOf tab, 1
@@ -49,8 +49,8 @@ angular.module('angularBootstrap.tabs', [])
 		template: """
 		<div class="tabbable">
 			<ul class="nav nav-tabs">
-				<li ng-repeat="tab in tabs" ng-class="{active: tab.selected}">
-					<a href="" ng-click="selectTab(tab)">{{tab.title()}}</a>
+				<li ng-repeat="tab in tabs" ng-class="{active: tab.selected()}">
+					<a href="" ng-click="selectTab(tab)">{{tab.title}}</a>
 				</li>
 			</ul>
 			<div class="tab-content" ng-transclude>
@@ -59,12 +59,18 @@ angular.module('angularBootstrap.tabs', [])
 	}
 ])
 .directive('strapTab', [ ->
-
+	nextTab = 0
 	linkFn = (scope, elm, attrs, container) ->
-		container.addTab scope
+		tab =
+			title: scope.title
+			selected: (newVal) ->
+				return scope.selected unless newVal?
+				scope.selected = newVal
+
+		container.addTab tab
 
 		scope.$on '$destroy', ->
-			container.removeTab scope
+			container.removeTab tab
 
 	return {
 		restrict: 'E'
@@ -72,7 +78,7 @@ angular.module('angularBootstrap.tabs', [])
 		require: '^strapTabs'
 		link: linkFn
 		scope:
-			title: 'accessor'
+			title: '='
 		template: """
 		<div class="tab-pane" ng-class="{active:selected}" ng-show="selected" ng-transclude></div>
 		"""

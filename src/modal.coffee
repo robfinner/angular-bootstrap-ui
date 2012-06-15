@@ -25,10 +25,7 @@ angular.module('angularBootstrap.modal', [])
 	return {
 		restrict: 'C'
 		require: '?ngModel'
-		scope:
-			backdrop: 'evaluate'
-			keyboard: 'evaluate'
-			ngModel: 'accessor'
+		scope: true
 		link: (scope, elm, attrs, model) ->
 			# Initially set options but don't show
 			$(elm).modal backdrop: scope.backdrop, keyboard: scope.keyboard, show: false
@@ -37,7 +34,7 @@ angular.module('angularBootstrap.modal', [])
 			# and we return
 			return unless model?
 
-			scope.$watch (->scope.ngModel()), (value) ->
+			scope.$watch attrs.ngModel, (value) ->
 				if value is true
 					$(elm).modal 'show'
 				else
