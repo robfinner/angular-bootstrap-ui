@@ -1,5 +1,11 @@
 # angular-bootstrap-ui
 
+**This project is now deprecated.  I recommend using angular-ui -> http://github.com/angular-ui/**
+
+Angular-ui doesn't have the tabs directive or the popover.  The popover may be moved later, but the tabs directive is unneeded (just ng-repeat tab title elements and tab content elements).
+
+***
+
 A set of [AngularJS](http://angularjs.org/) components to make easy use of [Twitter Bootstrap](http://twitter.github.com/bootstrap/) UI goodies.
 
 Demo at [http://ajoslin.github.com/angular-bootstrap-ui](http://ajoslin.github.com/angular-bootstrap-ui)
