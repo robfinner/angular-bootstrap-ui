@@ -22,4 +22,4 @@ Development
 * Requires [coffeescript](http://coffeescript.org) to develop.  Get it with [node.js](http://nodejs.org) and npm, running `npm install -g coffee-script` to install.
 * Run `cake` to see compile options
 * Before you commit, be sure to run both `cake coffee` and `cake build`, so all the js files are proper.
-* Tests? Who needs tests?  These are directives, good sir!  (yeah, yeah, yeah)
+* Tests? Who needs tests?  These are directives, good sir!  (yeah, yeah, yeah) 
